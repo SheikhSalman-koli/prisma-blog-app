@@ -12,6 +12,8 @@ export default function Navbar() {
     { title: 'Home', url: '/' },
     { title: 'Blogs', url: '/blogs' },
     { title: 'About', url: '/about' },
+    { title: 'Practice', url: '/development' },
+    { title: 'Dashboard', url: '/dashboard' },
     { title: 'Login', url: '/auth/login' },
     { title: 'Register', url: '/auth/register' },
   ];
