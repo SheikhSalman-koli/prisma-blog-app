@@ -10,23 +10,33 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { adminRoutes } from "@/src/routes/adminRoutes"
+import { userRoutes } from "@/src/routes/userRoutes"
+import { Route } from "@/src/types"
 
-// This is sample data.
-const data = {
 
-  navMain: [
-     {
-          title: "Write-blog",
-          url: "/dashboard/write-blog",
-        },
-        {
-          title: "Analytics",
-          url: "/dashboard/analytics",
-        },
-  ],
-}
+export function AppSidebar({
+  user, 
+  ...props
+}: {
+  user: { role: string } & React.ComponentProps<typeof Sidebar>
+}) {
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  let routes: Route[] = []
+
+  switch (user.role) {
+    case "admin":
+      routes = adminRoutes
+      break;
+    case "user":
+      routes = userRoutes
+      break;
+  
+    default:
+      routes = []
+      break;
+  }
+
   return (
     <Sidebar {...props}>
       <SidebarContent>
@@ -34,7 +44,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroupLabel>
           <Link href='/'>Home</Link>
         </SidebarGroupLabel>
-        {data.navMain.map((item) => (
+        {routes.map((item) => (
           <SidebarMenu
             key={item.title}>
             <SidebarMenuItem>
