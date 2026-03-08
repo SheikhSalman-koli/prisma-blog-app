@@ -19,6 +19,7 @@ export default function Navbar() {
   ];
 
   const pathname = usePathname()
+  
 
   return (
     <nav className=" border-b border-gray-200">
