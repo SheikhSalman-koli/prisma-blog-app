@@ -19,8 +19,8 @@ export default function BlogCard({ post }: { post: BlogPost }) {
       <div className="relative h-56 w-full overflow-hidden">
         {post.thumbnail ? (
           <Image
-            src={post.thumbnail}
-            alt={post.title}
+            src={post?.thumbnail}
+            alt={post?.title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />

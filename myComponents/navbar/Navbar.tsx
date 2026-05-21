@@ -1,24 +1,36 @@
 "use client"; // 1. Essential for interactivity
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ModeToggle } from '../theme/ModeToggle';
-import { userInfo } from '@/app/(dashboardlayout)/layout';
+import { userServices } from '@/src/services/user.services';
+import { Roles } from '@/src/constants/roles';
+import { getUserInfo } from '@/src/actions/user.action';
+// import { userInfo } from '@/app/(dashboardlayout)/layout';
 
 export default function Navbar() {
   // 2. State to track if menu is open
   const [isOpen, setIsOpen] = useState(false);
 
-  const userRole = userInfo.role
+  const [userInfo, setUserInfo] = useState({role: Roles.user})
+
+  useEffect(()=>{
+    ( async()=>{
+      const {data} = await getUserInfo()
+      setUserInfo(data?.user)
+    })
+  },[])
 
   const menuitem = [
     { title: 'Home', url: '/' },
     { title: 'Blogs', url: '/blogs' },
     { title: 'About', url: '/about' },
     { title: 'Practice', url: '/development' },
-    ...(userRole === 'user'
+    ...(userInfo?.role === Roles.user
       ? [{ title: 'Dashboard', url: '/dashboard' }]
       : [{ title: 'Dashboard', url: '/admin-dashboard' }]),
+      // { title: 'Dashboard', url: '/dashboard' },
+      // { title: 'Dashboard', url: '/admin-dashboard' },
     { title: 'Login', url: '/auth/login' },
     { title: 'Register', url: '/auth/register' },
   ];

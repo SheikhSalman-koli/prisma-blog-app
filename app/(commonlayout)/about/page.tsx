@@ -1,7 +1,6 @@
 'use client'
 
 import { getBlogs } from '@/src/actions/blog.action';
-import { blogServices } from '@/src/services/blog.services'
 import React, { useEffect, useState } from 'react'
 
 export default function AboutPage() {
@@ -11,7 +10,7 @@ export default function AboutPage() {
   //throw new Error('something went wrong!')
 
   const [data, setData] = useState()
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     (async ()=> {

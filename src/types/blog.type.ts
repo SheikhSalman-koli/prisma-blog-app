@@ -5,6 +5,7 @@ export interface BlogPost {
   thumbnail?: string | null;
   tags?: string[];
   views: number;
+  status: string
   _count?: {
     comments: number;
   };
